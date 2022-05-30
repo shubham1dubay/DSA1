@@ -1,0 +1,58 @@
+#include<stdio.h>
+#include<conio.h>
+#define MAX 100
+void MergeSortArray(int a[],int lb,int le,int rb,int re);
+void MergeSort(int a[],int beg,int end)
+{
+int mid;
+if(beg<end)
+{
+mid=(beg+end)/2;
+MergeSort(a,beg,mid);
+MergeSort(a,mid+1,end);
+MergeSortArray(a,beg,mid,mid+1,end);
+}
+}
+
+void MergeSortArray(int a[],int lb,int le,int rb,int re)
+{
+int na,nb,nc,k,c[MAX];
+na=lb;
+nb=rb;
+nc=lb;
+while((na<=le) && (nb<=re))
+{
+if(a[na]<a[nb])
+c[nc++]=a[na++];
+else
+c[nc++]=a[nb++];
+}
+if(na>le)
+{
+while(nb<=re)
+c[nc++]=a[nb++];
+}
+else
+{
+while(na<=le)
+{
+c[nc++]=a[na++];
+}
+for(k=lb;k<=re;k++)
+a[k]=c[k];
+}
+}
+
+
+void main()
+{
+int a[MAX]={8,2,6,9,8,7,5,4,2,3,6,9,1};
+int beg=0;
+int end=12;
+int i;
+MergeSort(a,beg,end);
+printf("\nSorted Array:");
+for(i=0;i<13;i++)
+printf("%d ",a[i]);
+}
+
